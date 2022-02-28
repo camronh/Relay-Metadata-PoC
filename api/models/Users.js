@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
     ethAddress: {
         type: String,
         required: true
+    },
+    companyName: {
+        type: String,
+        required: true
     }
 });
 

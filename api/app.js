@@ -8,16 +8,18 @@ app.use(bodyParser.json());
 
 //IMPORT ROUTES
 const createUsers = require('./routes/createUsers');
-
+const getUsers = require('./routes/getUser');
 //MIDDLEWARES
 
 //ROUTES
 
 app.use('/createUser', createUsers);
 
-app.get('/', (req, res) => {
-    res.send('Home');
-});
+app.use('/getUser', getUsers);
+
+// app.get('/', (req, res) => {
+//     res.send('Home');
+// });
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT, () => {
