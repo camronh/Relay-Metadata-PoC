@@ -17,9 +17,13 @@ app.use('/createUser', createUsers);
 
 app.use('/getUser', getUsers);
 
-// app.get('/', (req, res) => {
-//     res.send('Home');
+// ===========================
+// Please keep all of the endpoints in the main app.js file.
+// 
+// app.get('/createUser', (req, res) => {
+//     ...
 // });
+// ===========================
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT, () => {
