@@ -3,31 +3,34 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 const bodyParser = require('body-parser');
+// const API_KEY = "XdONGxOjq82pZrewrlUM";
+
 
 app.use(bodyParser.json());
 
-//IMPORT ROUTES
-const createUsers = require('./routes/createUsers');
-const getUsers = require('./routes/getUser');
-//MIDDLEWARES
 
-//ROUTES
+    //IMPORT ROUTES
+    const createUsers = require('./routes/createUsers');
+    const getUsers = require('./routes/getUser');
+    //MIDDLEWARES
 
-app.use('/createUser', createUsers);
+    //ROUTES
 
-app.use('/getUser', getUsers);
+    app.use('/createUser', createUsers);
 
-// ===========================
-// Please keep all of the endpoints in the main app.js file.
-// 
-// app.get('/createUser', (req, res) => {
-//     ...
-// });
-// ===========================
+    app.use('/getUser', getUsers);
 
-//Connect to DB
-mongoose.connect(process.env.DB_CONNECT, () => {
-    console.log('Connected to DB');
-});
+    // ===========================
+    // Please keep all of the endpoints in the main app.js file.
+    // 
+    // app.get('/createUser', (req, res) => {
+    //     ...
+    // });
+    // ===========================
+
+    //Connect to DB
+    mongoose.connect(process.env.DB_CONNECT, () => {
+        console.log('Connected to DB');
+    });
 
 app.listen(3000);

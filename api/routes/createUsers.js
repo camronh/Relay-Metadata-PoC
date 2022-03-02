@@ -9,16 +9,14 @@ router.post("/", async (req, res) => {
     companyName: req.body.companyName,
   });
   if (!user.name || !user.ethAddress || !user.companyName) {
-      res.status(400)
-    res.json({ message: "Please supply a valid name, ethAddress, and companyName" });
+      return res.status(400).json({ message: "Please supply a valid name, ethAddress, and companyName" });
   }
   try {
     const savedUser = await user.save();
-    res.json(savedUser);
     console.log("User Added!");
+    return res.json(savedUser);
   } catch (err) {
-    res.status(500)
-    res.json({ message: err });
+    return res.status(500).json({ message: err });
   }
 });
 
