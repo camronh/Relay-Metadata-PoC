@@ -23,7 +23,12 @@ app.post("/createUser", async (req, res) => {
         return res.status(400).json({ message: "Please supply a valid name, ethAddress, and companyName" });
     }
     try {
+      const apiKey = req.header("x-api-key"); //gives you the value of the header
       const savedUser = await user.save();
+      if (apiKey != process.env.API_KEY) {
+        console.log("x-api-key authentication failed");
+        return res.json({message: "Incorrect x-api-key."});
+        }
       console.log("User Added!");
       return res.json(savedUser);
     } catch (err) {
@@ -35,10 +40,14 @@ app.post("/createUser", async (req, res) => {
 // GET Route to get a specific user from his ETH Address
 app.get('/getUser', async (req, res) => {
     try {
+        const apiKey = req.header("x-api-key"); //gives you the value of the header
         const ethAddress = req.header('sponsorAddress');
         const chainId = req.header('chainId');
         const User = await Users.findOne({ ethAddress });
-
+        if (apiKey != process.env.API_KEY) {
+            console.log("x-api-key authentication failed");
+            return res.json({message: "Incorrect x-api-key."});
+        }
         if (chainId == 1)
             return res.status(500).json({message: "Please select a different chainID"});
 

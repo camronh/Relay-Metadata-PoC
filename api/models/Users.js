@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({ //noSQL schema, easier than SQL; it describes the way your data looks
     name: {
         type: String,
         required: true
@@ -15,4 +15,4 @@ const userSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Users', userSchema);
+module.exports = mongoose.model('Users', userSchema); //give it name and schema to use
