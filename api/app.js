@@ -7,7 +7,6 @@ const Users = require('./models/Users');
 const router = express.Router();
 // const API_KEY = "XdONGxOjq82pZrewrlUM";
 
-
 app.use(bodyParser.json());
 
 //ROUTES
@@ -19,20 +18,20 @@ app.post("/createUser", async (req, res) => {
       ethAddress: req.body.ethAddress,
       companyName: req.body.companyName,
     });
+    const apiKey = req.header("x-api-key"); //gives you the value of the header
+    if (apiKey != process.env.API_KEY) {
+        console.log("x-api-key authentication failed");
+        return res.json({message: "Incorrect x-api-key."});
+        }
     if (!user.name || !user.ethAddress || !user.companyName) {
         return res.status(400).json({ message: "Please supply a valid name, ethAddress, and companyName" });
     }
     try {
-      const apiKey = req.header("x-api-key"); //gives you the value of the header
       const savedUser = await user.save();
-      if (apiKey != process.env.API_KEY) {
-        console.log("x-api-key authentication failed");
-        return res.json({message: "Incorrect x-api-key."});
-        }
       console.log("User Added!");
       return res.json(savedUser);
     } catch (err) {
-      return res.status(500).json({ message: err });
+      return res.status(500).json({ message: "A User with that ETH Address already exists" });
     }
   });
 
