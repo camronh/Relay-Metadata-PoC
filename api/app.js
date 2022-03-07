@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const Users = require('./models/Users');
 const router = express.Router();
 // const API_KEY = "XdONGxOjq82pZrewrlUM";
+const cors = require('cors');
+
 
 app.use(bodyParser.json());
+app.use(cors());
 
 //ROUTES
 
