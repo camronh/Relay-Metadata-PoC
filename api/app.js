@@ -50,7 +50,7 @@ app.get('/getUser', async (req, res) => {
 
         if (apiKey != process.env.API_KEY) {
             console.log("x-api-key authentication failed");
-
+            //testing pull request change
             // Have the API return any errors thrown.
             // Ex. if (apiKey != process.env.API_KEY) throw "Incorrect x-api-key.";
 
