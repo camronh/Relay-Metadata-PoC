@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const bodyParser = require('body-parser');
 const Users = require('./models/Users');
+// Remove unused router
 const router = express.Router();
 // const API_KEY = "XdONGxOjq82pZrewrlUM";
 const cors = require('cors');
@@ -46,13 +47,23 @@ app.get('/getUser', async (req, res) => {
         const ethAddress = req.header('sponsorAddress');
         const chainId = req.header('chainId');
         const User = await Users.findOne({ ethAddress });
+
         if (apiKey != process.env.API_KEY) {
             console.log("x-api-key authentication failed");
+
+            // Have the API return any errors thrown.
+            // Ex. if (apiKey != process.env.API_KEY) throw "Incorrect x-api-key.";
+
             return res.json({message: "Incorrect x-api-key."});
         }
-        if (chainId == 1)
+        if (chainId == 1) // throw "No Mainnet";
             return res.status(500).json({message: "Please select a different chainID"});
 
+
+            // Still spaghetti code, but it works.
+            // Replace with guard clauses.
+            // throw if no eth address, throw if no user
+            // Return user if all guard clauses pass. 
             if (ethAddress) {
                 if (User) {
                     console.log(User);
@@ -70,6 +81,11 @@ app.get('/getUser', async (req, res) => {
             }
     
     } catch (err) {
+        // Have the API return any errors thrown.
+        // ex. res.status(500).json({ message: err });
+
+        // Allows 1 line guard clauses
+        // if (bug) throw "Bug found";
         console.log(err);
         return res.json({message: "Error in Getting User from DB"});
     }
