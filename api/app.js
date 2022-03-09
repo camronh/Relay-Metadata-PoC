@@ -4,11 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const bodyParser = require('body-parser');
 const Users = require('./models/Users');
-// Remove unused router
-const router = express.Router();
 // const API_KEY = "XdONGxOjq82pZrewrlUM";
 const cors = require('cors');
-
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -48,43 +45,21 @@ app.get('/getUser', async (req, res) => {
         const chainId = req.header('chainId');
         const User = await Users.findOne({ ethAddress });
 
-        if (apiKey != process.env.API_KEY) {
-            console.log("x-api-key authentication failed");
-            //testing pull request change
-            // Have the API return any errors thrown.
-            // Ex. if (apiKey != process.env.API_KEY) throw "Incorrect x-api-key.";
+        if (apiKey != process.env.API_KEY) throw "Incorrect x-api-key. Authentication failed.";
 
-            return res.json({message: "Incorrect x-api-key."});
-        }
-        if (chainId == 1) // throw "No Mainnet";
-            return res.status(500).json({message: "Please select a different chainID"});
+        if (chainId == 1) throw "No Mainnet. Please select a different chainID";
 
+        if (!ethAddress) throw "Please supply a valid ETH Address."
 
-            // Still spaghetti code, but it works.
-            // Replace with guard clauses.
-            // throw if no eth address, throw if no user
-            // Return user if all guard clauses pass. 
-            if (ethAddress) {
-                if (User) {
-                    console.log(User);
-                    return res.json(User);
-                }
-                else if (!User) {
-                    console.log("No User Found for that ETH Address");
-                    return res.json({message: "No User Found for that ETH Address"});
-                }
-                // res.json(User);
-            }
-            else if (!ethAddress) {
-                console.log("Please supply a valid ETH Address");
-                return res.status(500).json({message: "Please supply a valid ETH Address"});
+        if (!User) throw "No user found for that ETH address.";
+            //return User after all guard clauses passed
+            else {
+                console.log(User);
+                return res.json(User);
             }
     
-    } catch (err) {
-        // Have the API return any errors thrown.
-        // ex. res.status(500).json({ message: err });
-
-        // Allows 1 line guard clauses
+    } catch (err) { // Have the API return any errors thrown.
+        res.status(500).json({ message: err });
         // if (bug) throw "Bug found";
         console.log(err);
         return res.json({message: "Error in Getting User from DB"});
