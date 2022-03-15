@@ -13,16 +13,21 @@ const WooCommerce = new WooCommerceRestApi({
   version: "wc/v3",
 });
 
-// Polls the Woocommerce API for neqw orders
+// Polls the Woocommerce API for new orders
 async function listenForNewOrders() {
+  console.log(`Listening for new orders...`);
+
   return new Promise(async (resolve, reject) => {
     // Loop continuously until a new order is found
     while (true) {
       const { data: orders } = await WooCommerce.get("orders", {
         status: "processing,on-hold",
       });
-      // If new orders are found, return orders
-      if (orders.length) resolve(orders);
+      // If new orders are found, reformat, then return orders
+      if (orders.length) {
+        const parsedOrders = orders.map(parseOrder);
+        return resolve(parsedOrders);
+      }
       // Otherwise, sleep for a bit and try again
       else await sleep(sleepSeconds);
     }
@@ -30,7 +35,7 @@ async function listenForNewOrders() {
 }
 
 // Mark an order as completed in the WooCommerce Store
-async function markComplete(orderId) {
+async function markOrderComplete(orderId) {
   const response = await WooCommerce.put(`orders/${orderId}`, {
     status: "completed",
   });
@@ -41,6 +46,27 @@ async function markComplete(orderId) {
   console.log(`Marked order ${orderId} completed`);
 }
 
+// Mark an order as failed in the WooCommerce Store
+async function markOrderFailed(orderId) {
+  const response = await WooCommerce.put(`orders/${orderId}`, {
+    status: "failed",
+  });
+
+  if (response.status !== 200) throw `Failed to mark order ${orderId} failed`;
+
+  console.log(`Marked order ${orderId} failed`);
+}
+
+// Takes in Woocommerce order data and returns in a format that can be used to create a new user
+function parseOrder(order) {
+  return {
+    name: order.billing.first_name + " " + order.billing.last_name,
+    ethAddress: order.billing.ethaddress,
+    email: order.billing.email,
+    id: order.id,
+  };
+}
+
 // Wait for a specified number of seconds
 async function sleep(seconds) {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
@@ -48,5 +74,6 @@ async function sleep(seconds) {
 
 module.exports = {
   listenForNewOrders,
-  markComplete,
+  markOrderComplete,
+  markOrderFailed,
 };
