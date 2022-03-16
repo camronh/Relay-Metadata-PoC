@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator'); 
 
-const userSchema = mongoose.Schema({ //noSQL schema, easier than SQL; it describes the way your data looks
+const userSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -17,4 +17,4 @@ const userSchema = mongoose.Schema({ //noSQL schema, easier than SQL; it describ
     }
 });
 userSchema.plugin(uniqueValidator)
-module.exports = mongoose.model('Users', userSchema); //give it name and schema to use
+module.exports = mongoose.model('Users', userSchema);
