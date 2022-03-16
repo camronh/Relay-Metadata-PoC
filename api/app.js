@@ -30,12 +30,12 @@ app.post("/createUser", async (req, res) => {
             }
             catch (err) {
                 console.log("A User with that ETH Address already exists!");
-                return res.status(500).json({ message: "A User with that ETH Address already exists!" });
+                return res.status(400).json({ message: "A User with that ETH Address already exists!" });
             }
         }
     }   catch (err) {
         console.log(err);
-        return res.status(500).json({ message: err });
+        return res.status(400).json({ message: err });
     }
   });
 
@@ -63,7 +63,7 @@ app.get('/getUser', async (req, res) => {
     
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ message: err });
+        return res.status(400).json({ message: err });
     }
 });
 
