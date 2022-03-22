@@ -22,23 +22,16 @@ app.post("/createUser", async (req, res) => {
 
     if (!user.name || !user.ethAddress || !user.companyName) throw "Please supply a valid name, ethAddress, and companyName.";
 
-        else {
-            try{
-            const savedUser = await user.save();
-            console.log("User Added!");
-            return res.json(savedUser);
-            }
-            catch (err) {
-                console.log("A User with that ETH Address already exists!");
-                return res.status(400).json({ message: "A User with that ETH Address already exists!" });
-            }
-        }
-    }   catch (err) {
-        console.log(err);
-        return res.status(400).json({ message: err });
+    const savedUser = await user.save();
+    console.log("User Added!");
+    return res.status(201).json(savedUser); //successfully saved in DB
+    
+    }   
+    catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: err });
     }
   });
-
 
 // GET Route to get a specific user from his ETH Address
 app.get('/getUser', async (req, res) => {
@@ -50,16 +43,14 @@ app.get('/getUser', async (req, res) => {
 
         if (apiKey != process.env.API_KEY) throw "Incorrect x-api-key. Authentication failed.";
 
-        if (chainId == 1) throw "No requests on Mainnet. Please select a different chainID";
+        if (parseInt(chainId) == 1) throw "No requests on Mainnet. Please select a different chainID";
 
         if (!ethAddress) throw "Please supply a valid ETH Address."
 
         if (!User) throw "No user found for that ETH address.";
 
-            else {
-                console.log(User);
-                return res.json(User);
-            }
+        console.log(User);
+        return res.status(200).json(User); //successfully queried from DB
     
     } catch (err) {
         console.log(err);
