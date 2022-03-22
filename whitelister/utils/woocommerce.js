@@ -40,8 +40,9 @@ async function markOrderComplete(orderId) {
     status: "completed",
   });
 
-  if (response.status !== 200)
+  if (response.status !== 200) {
     throw `Failed to mark order ${orderId} completed`;
+  }
 
   console.log(`Marked order ${orderId} completed`);
 }
