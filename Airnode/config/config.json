@@ -1,0 +1,122 @@
+{
+  "chains": [],
+  "nodeSettings": {
+    "cloudProvider": {
+      "type": "aws",
+      "disableConcurrencyReservations": true,
+      "region": "us-east-1"
+    },
+    "airnodeWalletMnemonic": "${MNEMONIC}",
+    "logFormat": "plain",
+    "logLevel": "INFO",
+    "nodeVersion": "0.5.0",
+    "stage": "dev",
+    "heartbeat": {
+      "enabled": false
+    },
+    "httpGateway": {
+      "enabled": true,
+      "apiKey": "${HTTP_GATEWAY_API_KEY}"
+    },
+    "httpSignedDataGateway": {
+      "enabled": false
+    }
+  },
+  "triggers": {
+    "rrp": [
+      {
+        "endpointId": "0x0eda2a3040c2d80622eb58ff48b23d9c04bf74b4280140931a3a97e5a691c4db",
+        "endpointName": "GET /getUser",
+        "oisTitle": "RelayMetadataPOC"
+      }
+    ],
+    "httpSignedData": [],
+    "http": [
+      {
+        "endpointId": "0x0eda2a3040c2d80622eb58ff48b23d9c04bf74b4280140931a3a97e5a691c4db",
+        "endpointName": "GET /getUser",
+        "oisTitle": "RelayMetadataPOC"
+      }
+    ]
+  },
+  "ois": [
+    {
+      "oisFormat": "1.0.0",
+      "title": "RelayMetadataPOC",
+      "version": "v1",
+      "apiSpecifications": {
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "security": {
+          "x-api-key": [],
+          "relayChainId": [],
+          "relaySponsor": [],
+          "relayRequester": []
+        },
+        "components": {
+          "securitySchemes": {
+            "x-api-key": {
+              "type": "apiKey",
+              "in": "header",
+              "name": "x-api-key"
+            },
+            "relayChainId": {
+              "in": "header",
+              "type": "relayChainId",
+              "name": "chainId"
+            },
+            "relaySponsor": {
+              "in": "header",
+              "type": "relaySponsorAddress",
+              "name": "sponsorAddress"
+            },
+            "relayRequester": {
+              "in": "header",
+              "type": "relayRequesterAddress",
+              "name": "requesterAddress"
+            }
+          }
+        },
+        "paths": {
+          "/getUser": {
+            "get": {
+              "parameters": []
+            }
+          }
+        }
+      },
+      "endpoints": [
+        {
+          "name": "GET /getUser",
+          "operation": {
+            "method": "get",
+            "path": "/getUser"
+          },
+          "reservedParameters": [
+            {
+              "name": "_type"
+            },
+            {
+              "name": "_path"
+            },
+            {
+              "name": "_times"
+            }
+          ],
+          "fixedOperationParameters": [],
+          "parameters": []
+        }
+      ]
+    }
+  ],
+  "apiCredentials": [
+    {
+      "oisTitle": "RelayMetadataPOC",
+      "securitySchemeName": "x-api-key",
+      "securitySchemeValue": "${RelayMetadataPOC_x_api_key}"
+    }
+  ]
+}
