@@ -15,8 +15,9 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongoose": "^6.2.3",
-    "mongoose-unique-validator": "^3.0.0",
-    "nodemon": "^2.0.15",
-    "uuid-apikey": "^1.5.3"
+    "mongoose-unique-validator": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
