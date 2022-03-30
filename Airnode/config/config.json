@@ -1,5 +1,23 @@
 {
-  "chains": [],
+  "chains": [
+    {
+      "authorizers": [],
+      "contracts": {
+        "AirnodeRrp": "0x3B35250Ca54C1Fb8c83D48F21231ef6e4fb9f79D"
+      },
+      "id": "3",
+      "providers": {
+        "Ropsten": {
+          "url": "${Ropsten_RPC}"
+        }
+      },
+      "options": {
+        "txType": "eip1559"
+      },
+      "maxConcurrency": 5,
+      "type": "evm"
+    }
+  ],
   "nodeSettings": {
     "cloudProvider": {
       "type": "aws",
@@ -25,16 +43,16 @@
   "triggers": {
     "rrp": [
       {
-        "endpointId": "0x0eda2a3040c2d80622eb58ff48b23d9c04bf74b4280140931a3a97e5a691c4db",
-        "endpointName": "GET /getUser",
+        "endpointId": "0xa14e9cb3611cc6cd0fffc51de8a394dbac1cd4694e272e7295f678cd915ac83e",
+        "endpointName": "GET /randomNumber",
         "oisTitle": "RelayMetadataPOC"
       }
     ],
     "httpSignedData": [],
     "http": [
       {
-        "endpointId": "0x0eda2a3040c2d80622eb58ff48b23d9c04bf74b4280140931a3a97e5a691c4db",
-        "endpointName": "GET /getUser",
+        "endpointId": "0xa14e9cb3611cc6cd0fffc51de8a394dbac1cd4694e272e7295f678cd915ac83e",
+        "endpointName": "GET /randomNumber",
         "oisTitle": "RelayMetadataPOC"
       }
     ]
@@ -47,22 +65,16 @@
       "apiSpecifications": {
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://8p6v9cl5yc.execute-api.us-east-1.amazonaws.com/latest"
           }
         ],
         "security": {
-          "x-api-key": [],
           "relayChainId": [],
           "relaySponsor": [],
           "relayRequester": []
         },
         "components": {
           "securitySchemes": {
-            "x-api-key": {
-              "type": "apiKey",
-              "in": "header",
-              "name": "x-api-key"
-            },
             "relayChainId": {
               "in": "header",
               "type": "relayChainId",
@@ -81,7 +93,7 @@
           }
         },
         "paths": {
-          "/getUser": {
+          "/randomNumber": {
             "get": {
               "parameters": []
             }
@@ -90,10 +102,10 @@
       },
       "endpoints": [
         {
-          "name": "GET /getUser",
+          "name": "GET /randomNumber",
           "operation": {
             "method": "get",
-            "path": "/getUser"
+            "path": "/randomNumber"
           },
           "reservedParameters": [
             {
@@ -112,11 +124,5 @@
       ]
     }
   ],
-  "apiCredentials": [
-    {
-      "oisTitle": "RelayMetadataPOC",
-      "securitySchemeName": "x-api-key",
-      "securitySchemeValue": "${RelayMetadataPOC_x_api_key}"
-    }
-  ]
+  "apiCredentials": []
 }

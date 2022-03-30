@@ -47,8 +47,8 @@ async function getUser(ethAddress) {
     };
 
     docClient.get(params, function (err, data) {
-      if (err) return reject(err);
-      if (!data.Item) return reject("Address not found!");
+      if (err) return reject("Failed to get User!");
+      if (!data.Item) return reject("Unauthorized!");
       console.log("Address found!");
       resolve(data.Item);
     });

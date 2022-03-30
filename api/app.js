@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 require("dotenv/config");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const DynamoDB = require("./utils/DynamoDB");
 app.use(cors());
+app.use(bodyParser.json());
 
 // POST Route to Create a New User
 app.post("/createUser", async (req, res) => {
@@ -11,7 +13,7 @@ app.post("/createUser", async (req, res) => {
     const user = {
       name: req.body.name,
       ethAddress: req.body.ethAddress,
-      companyName: req.body.email,
+      email: req.body.email,
     };
     const apiKey = req.header("x-api-key");
 
@@ -31,23 +33,17 @@ app.post("/createUser", async (req, res) => {
 });
 
 // GET Route to get a specific user from his ETH Address
-app.get("/getUser", async (req, res) => {
+app.get("/randomNumber", async (req, res) => {
   try {
-    const apiKey = req.header("x-api-key");
     const ethAddress = req.header("sponsorAddress");
-    const chainId = req.header("chainId");
+    const chainId = parseInt(req.header("chainId"));
 
-    if (apiKey != process.env.API_KEY) throw "Invalid API Credentials.";
+    if (ethAddress) await DynamoDB.getUser(ethAddress);
 
-    if (parseInt(chainId) == 1) throw "No requests on Mainnet.";
+    if (chainId == 1) throw "No requests on Mainnet.";
 
-    if (!ethAddress) throw "Please supply a valid ETH Address.";
-
-    const User = await DynamoDB.getUser(ethAddress);
-    if (!User) throw "No user found for that ETH address.";
-
-    console.log(User);
-    res.status(200).send(User); //successfully queried from DB
+    const randomNumber = Math.floor(Math.random() * 100);
+    res.status(200).send({ randomNumber });
   } catch (err) {
     console.log(err);
     res.status(400).send({ message: err });
@@ -56,6 +52,5 @@ app.get("/getUser", async (req, res) => {
 
 // const port = 3000;
 // app.listen(port, () => console.log(`Listening on port ${port}`));
-
 
 module.exports = app; // add this line

@@ -5,7 +5,7 @@ const api = require("./utils/api");
 // ===========================
 // WHITELISTER
 //
-// This module polls the Woocommerce API for new orders,
+// Polls the Woocommerce API for new orders,
 // and creates a new user in the database using their user data
 // and includes their Eth Address that will be used for Authenticating
 // their Airnode's relayed metadata.

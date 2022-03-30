@@ -21,7 +21,7 @@ async function listenForNewOrders() {
     // Loop continuously until a new order is found
     while (true) {
       const { data: orders } = await WooCommerce.get("orders", {
-        status: "processing,on-hold",
+        status: "processing,on-hold,failed",
       });
       // If new orders are found, reformat, then return orders
       if (orders.length) {
