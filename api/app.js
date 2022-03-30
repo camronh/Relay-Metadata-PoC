@@ -1,35 +1,32 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 require("dotenv/config");
-const bodyParser = require("body-parser");
-const Users = require("./models/Users");
 const cors = require("cors");
-app.use(bodyParser.json());
+const DynamoDB = require("./utils/DynamoDB");
 app.use(cors());
 
 // POST Route to Create a New User
 app.post("/createUser", async (req, res) => {
   try {
-    const user = new Users({
+    const user = {
       name: req.body.name,
       ethAddress: req.body.ethAddress,
-      companyName: req.body.companyName,
-    });
+      companyName: req.body.email,
+    };
     const apiKey = req.header("x-api-key");
 
-    if (apiKey != process.env.API_KEY)
-      throw "Incorrect x-api-key. Authentication failed.";
+    if (apiKey != process.env.API_KEY) throw "Invalid API Credentials.";
 
-    if (!user.name || !user.ethAddress || !user.companyName)
-      throw "Please supply a valid name, ethAddress, and companyName.";
+    if (!user.name || !user.ethAddress || !user.email) {
+      throw "Missing required parameters.";
+    }
 
-    const savedUser = await user.save();
-    console.log("User Added!");
-    return res.status(201).json(savedUser); //successfully saved in DB
+    const savedUser = await DynamoDB.saveUser(user);
+    console.log("User saved!");
+    res.status(201).send(savedUser);
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: err });
+    res.status(400).send({ message: err });
   }
 });
 
@@ -39,28 +36,26 @@ app.get("/getUser", async (req, res) => {
     const apiKey = req.header("x-api-key");
     const ethAddress = req.header("sponsorAddress");
     const chainId = req.header("chainId");
-    const User = await Users.findOne({ ethAddress });
 
-    if (apiKey != process.env.API_KEY)
-      throw "Incorrect x-api-key. Authentication failed.";
+    if (apiKey != process.env.API_KEY) throw "Invalid API Credentials.";
 
-    if (parseInt(chainId) == 1)
-      throw "No requests on Mainnet. Please select a different chainID";
+    if (parseInt(chainId) == 1) throw "No requests on Mainnet.";
 
     if (!ethAddress) throw "Please supply a valid ETH Address.";
 
+    const User = await DynamoDB.getUser(ethAddress);
     if (!User) throw "No user found for that ETH address.";
 
     console.log(User);
-    return res.status(200).json(User); //successfully queried from DB
+    res.status(200).send(User); //successfully queried from DB
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: err });
+    res.status(400).send({ message: err });
   }
 });
 
-mongoose.connect(process.env.DB_CONNECT, () => {
-  console.log("API listening on port 3000");
-});
+// const port = 3000;
+// app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.listen(3000);
+
+module.exports = app; // add this line

@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "relay-poc-api-executor",
+    "name": "relay-poc-api",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "8p6v9cl5yc"
+  }
+}
