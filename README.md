@@ -1,4 +1,4 @@
-# Airnode Authorizers PoC
+# Airnode Off-Chain Auth PoC
 
 > A Proof-of-Concept that demonstrates how an API Provider can manage access to their Airnode in their backend using the [metadata relayed](https://docs.api3.org/airnode/v0.5/concepts/relay-meta-auth.html) in each Airnode request.
 
