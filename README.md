@@ -83,7 +83,10 @@ After checkout you should notice a new user was successfully created in the Fulf
 
 Back in the [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/) repeat steps 3 and 4 if necessary and press "Make Request".
 
-This time our Airnode will recognize this request is coming from the address we provided in step 5 and will authorize it and provide us with our random number.
+This time our Airnode will recognize this request is coming from the address we provided in step 5 and will authorize it and provide us with our random number!
+
+![Successful Airnode Request!](https://user-images.githubusercontent.com/26840412/161107410-277e7fe8-3ee4-4edb-82a3-8eab3ba018b4.png)
+
 
 ---
 ## Conclusion
