@@ -76,6 +76,7 @@ You should notice a field for "Eth_add" at the bottom of the checkout form. Here
 - For the "eth_add" field input `0xe2dB4f54F8FAB66e44386e49aFcB3EF4a87a8787`
 
 After checkout you should notice a new user was successfully created in the Fulfillment Script terminal from step 1. 
+
 ![Screen Shot 2022-03-31 at 12 42 24 PM](https://user-images.githubusercontent.com/26840412/161106991-0393399c-8293-426b-b479-5be18138b78c.png)
 
 
