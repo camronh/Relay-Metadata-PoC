@@ -8,7 +8,7 @@ Secrets used on a public blockchain become public. It is important that we avoid
 
 API providers have the options of off-chain or on-chain whitelisting. Off-chain whitelisting is achieved through Airnode's [Relayed Metadata](https://docs.api3.org/airnode/v0.5/concepts/relay-meta-auth.html). Each request made to your Airnode will also include some metadata that describes the context of the request being made. This includes the contract, wallet, and chain information that can be checked against your back end for validity. This makes it easy to only respond to requests that are made from addresses provided by paying customers during the subscription process. 
 
-![Authorizers Flow](https://user-images.githubusercontent.com/26840412/153293097-d53066e5-9292-4f79-bcbf-93c36e33e8ea.png)
+![Off-Chain Authorization Flow](https://user-images.githubusercontent.com/26840412/161104448-7edf4d82-384f-4281-b8da-9e5905e20b1b.png)
 
 > More detailed [Diagram Here](https://docs.api3.org/airnode/v0.5/concepts/relay-meta-auth.html#simple-example)
 
@@ -48,6 +48,8 @@ npm i && node app.js
 We will be using the [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/) attempt to make a request for a random number. From the [/airnode](/airnode) folder, drag and drop the `config/config.json` and `output/receipt.json` files into the respective boxes. 
 
 We will be using the **GET /randomNumber** endpoint.
+
+![Prepare Testing Suite](https://user-images.githubusercontent.com/26840412/161105082-abbcc3dd-3b6a-47d1-869d-d9d4f82cad6d.png)
 
 
 ## 3. Set parameters
