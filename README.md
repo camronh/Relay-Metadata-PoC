@@ -63,10 +63,9 @@ The `/randomNumber` endpoint of our API doesn't take any parameters, so the only
 
 Click the "Blockchain Request" button and Connect your Metamask wallet. **Be sure you are connected to the Ropsten Network!!** Press "Make Request" when you're ready.
 
-After some time (could be minutes depending on the chain), the logs should pick up that the Airnode request failed. This is expected, as we haven't subscribed to the API yet and our request has been denied as unauthorized.
-
 ![Unauthorized Request](https://user-images.githubusercontent.com/26840412/161106472-ab550682-f350-4c25-b647-ae78491af4ab.png)
 
+After some time (could be minutes depending on the chain), the logs should pick up that the Airnode request failed. This is expected, as we haven't subscribed to the API yet and our request has been denied as unauthorized.
 
 ## 5. Subscribe to the API
 
@@ -77,6 +76,8 @@ You should notice a field for "Eth_add" at the bottom of the checkout form. Here
 - For the "eth_add" field input `0xe2dB4f54F8FAB66e44386e49aFcB3EF4a87a8787`
 
 After checkout you should notice a new user was successfully created in the Fulfillment Script terminal from step 1. 
+![Screen Shot 2022-03-31 at 12 42 24 PM](https://user-images.githubusercontent.com/26840412/161106991-0393399c-8293-426b-b479-5be18138b78c.png)
+
 
 ## 6. Attempt an Authorized API request
 
