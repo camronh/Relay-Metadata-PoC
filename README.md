@@ -65,6 +65,7 @@ Click the "Blockchain Request" button and Connect your Metamask wallet. **Be sur
 
 After some time (could be minutes depending on the chain), the logs should pick up that the Airnode request failed. This is expected, as we haven't subscribed to the API yet and our request has been denied as unauthorized.
 
+![Unauthorized Request](https://user-images.githubusercontent.com/26840412/161106472-ab550682-f350-4c25-b647-ae78491af4ab.png)
 
 
 ## 5. Subscribe to the API
