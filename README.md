@@ -16,7 +16,7 @@ In this PoC, we take the role of a random number generation API provider that re
 
 ## Repo Structure
 
-- [Airnode](/airnode) - Everything you need to run a First-Party Oracle.
+- [Airnode](/Airnode) - Everything you need to run a First-Party Oracle.
 - [Webstore](http://13.233.252.69/) - An example Wordpress Woocommerce PoS for API Subscriptions
 - [Fulfillment Script](/whitelister) - Picks up new orders from Webstore and executes the Authorizer transaction
 - [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/) - A dApp for making Airnode requests
@@ -45,7 +45,7 @@ npm i && node app.js
 ```
 
 ## 2. Prepare [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/)
-We will be using the [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/) attempt to make a request for a random number. From the [/airnode](/airnode) folder, drag and drop the `config/config.json` and `output/receipt.json` files into the respective boxes. 
+We will be using the [Testing Suite](https://master.d3unh1kz3ytpci.amplifyapp.com/) attempt to make a request for a random number. From the [/Airnode](/Airnode) folder, drag and drop the `config/config.json` and `output/receipt.json` files into the respective boxes. 
 
 We will be using the **GET /randomNumber** endpoint.
 
