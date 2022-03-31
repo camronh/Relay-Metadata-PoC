@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-airnode": "cd Airnode && docker run -it --rm --env-file aws.env -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v \"$(pwd)/config:/app/config\" -v \"$(pwd)/output:/app/output\" api3/airnode-deployer:0.5.0 deploy",
-    "remove-airnode": "cd Airnode && docker run -it --rm --env-file aws.env -v \"$(pwd)/output:/app/output\" api3/airnode-deployer:0.5.0 remove -r output/receipt.json"
+    "deploy-airnode": "cd airnode && docker run -it --rm --env-file aws.env -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v \"$(pwd)/config:/app/config\" -v \"$(pwd)/output:/app/output\" api3/airnode-deployer:0.5.0 deploy",
+    "remove-airnode": "cd airnode && docker run -it --rm --env-file aws.env -v \"$(pwd)/output:/app/output\" api3/airnode-deployer:0.5.0 remove -r output/receipt.json"
   },
   "repository": {
     "type": "git",
