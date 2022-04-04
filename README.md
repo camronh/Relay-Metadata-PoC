@@ -33,7 +33,7 @@ First clone this repo. Then, start from the root directory of the repo:
 
 > Using our Gitpod will automate this step by spinning up a cloud environment for the whitelisting script. 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/camronh/Subscription-PoC)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/camronh/relay-poc)
 
  ###  **\- OR -**
 
